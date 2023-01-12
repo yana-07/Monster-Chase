@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
 
     private bool isGrounded = true;
     private const string GROUND_TAG = "Ground";
-
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
