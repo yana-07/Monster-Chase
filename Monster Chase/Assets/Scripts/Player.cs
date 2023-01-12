@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     private Animator anim;
     private const string WALK_ANIMATION = "Walk";
 
-    private bool isGrounded;
+    private bool isGrounded = true;
+    private const string GROUND_TAG = "Ground";
 
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class Player : MonoBehaviour
     {
         
     }
-     
+
     // Update is called once per frame
     private void Update()
     {
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     // FixedUpdate is called at each timestep (Proj Settings > Time > Fixed Timestep)
     private void FixedUpdate()
     {
+        PlayerJump();
     }
 
     private void PlayerMoveKeyboard()
@@ -69,5 +71,23 @@ public class Player : MonoBehaviour
         {
             anim.SetBool(WALK_ANIMATION, false);
         }
-    }    
+    }
+
+    private void PlayerJump()
+    {
+        // platform-neutral (space on a keyboard, touch on a mobile device)
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            isGrounded = false;
+            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(GROUND_TAG))
+        {
+            isGrounded = true;
+        }
+    }
 }
