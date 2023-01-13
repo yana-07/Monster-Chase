@@ -20,6 +20,11 @@ public class CameraFollow : MonoBehaviour
     // LateUpdate is called right after each Update call, where the player's position is already refreshed
     private void LateUpdate()
     {
+        if (player == null)
+        {
+            return;
+        }
+
         tempPos = transform.position;
         tempPos.x = player.position.x;
 
