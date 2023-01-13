@@ -12,13 +12,13 @@ public class CameraFollow : MonoBehaviour
     private float minX, maxX;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
     }
 
     // LateUpdate is called right after each Update call, where the player's position is already refreshed
-    void LateUpdate()
+    private void LateUpdate()
     {
         tempPos = transform.position;
         tempPos.x = player.position.x;
